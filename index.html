@@ -8,7 +8,7 @@
 <div style="margin:15px 0"><label for="date">Periodo di riferimento</label><input id="date" type="date"></div>
 <div class="stats"><div class="stat"><small>Scatole lavorate</small><strong id="boxes">0</strong></div><div class="stat"><small>Fascicoli totali</small><strong id="files">0</strong></div></div><p id="range" class="muted" style="font-size:13px;margin-bottom:0"></p></section>
 <section class="card hidden" id="activeCard"><h2 style="margin-top:0">📦 Scatola in lavorazione</h2><p id="activeInfo"></p><label for="finishCount">Fascicoli nella scatola</label><input id="finishCount" type="number" inputmode="numeric" min="0" step="1" placeholder="Inserisci a fine lavorazione"><button id="finishBtn" class="primary full" style="margin-top:12px">✓ Completa scatola</button><button id="cancelBtn" class="secondary full" style="margin-top:8px">Annulla lavorazione</button></section><section class="card"><h2 style="margin-top:0">Nuova scatola</h2><div class="actions"><button id="scanBtn" class="primary">▣ Leggi etichetta</button><button id="manualBtn" class="secondary">✎ Inserisci</button></div>
-<div id="scanner" class="hidden"><p class="notice">Fotografa l'etichetta intera. Cerchiamo separatamente le scritte in più fasce dell'immagine. Leggiamo il nome e il codice L/B/S senza usare il QR. La fotocamera si chiude dopo lo scatto. Il riconoscimento richiede una connessione per caricare il motore OCR.</p><input id="labelPhoto" type="file" accept="image/*" capture="environment"><p id="ocrStatus" class="muted" aria-live="polite"></p><div id="cropPanel" class="hidden"><p class="notice">Ritaglio facoltativo: usalo solo se la lettura automatica non riesce. Seleziona solo la scritta sopra oppure sotto il QR.</p><div id="cropArea" style="position:relative;touch-action:none;user-select:none;border-radius:12px;overflow:hidden;background:#eee;line-height:0"><img id="cropImage" alt="Fotografia etichetta" style="width:100%;height:auto;display:block"><div id="cropRect" style="position:absolute;border:3px solid #7c3aed;background:#a78bfa22;box-shadow:0 0 0 2000px #0004;touch-action:none;cursor:move"></div></div><label for="cropSize">Dimensione ritaglio</label><input id="cropSize" type="range" min="25" max="100" value="70"><button type="button" id="readCrop" class="primary full">🔎 Riprova con il ritaglio</button><button type="button" id="retryPhoto" class="secondary full" style="margin-top:8px">Scatta un'altra foto</button></div><button id="stopBtn" class="secondary full" style="margin-top:8px">Annulla</button></div>
+<div id="scanner" class="hidden"><div class="notice" style="margin-top:12px"><strong>Nuovo lettore OCR online</strong><p>Inserisci una volta la chiave gratuita OCR.space. Rimane solo su questo dispositivo. Le foto delle etichette saranno inviate al servizio OCR.space per la lettura.</p><input id="ocrApiKey" type="password" autocomplete="off" placeholder="Chiave API gratuita OCR.space"><button type="button" class="secondary full" id="saveOcrKey" style="margin-top:8px">Salva chiave sul telefono</button><small id="ocrKeyStatus"></small></div><p class="notice">Fotografa l'etichetta intera. Cerchiamo separatamente le scritte in più fasce dell'immagine. Leggiamo il nome e il codice L/B/S senza usare il QR. La fotocamera si chiude dopo lo scatto. Il riconoscimento richiede una connessione per caricare il motore OCR.</p><input id="labelPhoto" type="file" accept="image/*" capture="environment"><p id="ocrStatus" class="muted" aria-live="polite"></p><div id="cropPanel" class="hidden"><p class="notice">Ritaglio facoltativo: usalo solo se la lettura automatica non riesce. Seleziona solo la scritta sopra oppure sotto il QR.</p><div id="cropArea" style="position:relative;touch-action:none;user-select:none;border-radius:12px;overflow:hidden;background:#eee;line-height:0"><img id="cropImage" alt="Fotografia etichetta" style="width:100%;height:auto;display:block"><div id="cropRect" style="position:absolute;border:3px solid #7c3aed;background:#a78bfa22;box-shadow:0 0 0 2000px #0004;touch-action:none;cursor:move"></div></div><label for="cropSize">Dimensione ritaglio</label><input id="cropSize" type="range" min="25" max="100" value="70"><button type="button" id="readCrop" class="primary full">🔎 Riprova con il ritaglio</button><button type="button" id="retryPhoto" class="secondary full" style="margin-top:8px">Scatta un'altra foto</button></div><button id="stopBtn" class="secondary full" style="margin-top:8px">Annulla</button></div>
 <form id="entryForm" class="hidden"><div id="ocrReview" class="notice hidden" style="margin-bottom:12px"><strong>Testo riconosciuto (da verificare)</strong><pre id="ocrRaw" style="white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:150px;overflow:auto"></pre><button type="button" id="retryOCR" class="secondary">Ritaglio facoltativo</button></div><label for="lot">Lotto</label><input id="lot" required autocomplete="off" placeholder="Es. 10"><label for="pallet">Bancale (B)</label><input id="pallet" required inputmode="numeric" placeholder="Es. 2"><label for="boxno">Numero scatola (S)</label><input id="boxno" required autocomplete="off" placeholder="Es. 36"><label for="studio">Studio / sigla sull'etichetta</label><input id="studio" autocomplete="off" placeholder="Es. CST"><label for="notary">Notaio</label><select id="notary" style="width:100%"><option value="">Seleziona o scrivi un notaio</option></select><input id="notaryCustom" autocomplete="off" placeholder="Nome notaio (se non in elenco)" style="margin-top:8px"><button type="button" id="saveStudio" class="secondary full" style="margin-top:8px">+ Memorizza notaio per questo studio</button><p class="notice">I fascicoli li inserirai quando avrai finito la scatola.</p><label for="workdate">Data lavorazione</label><input id="workdate" required type="date"><button type="submit" class="primary full" style="margin-top:16px">▶ Inizia lavorazione</button><p id="message" aria-live="polite"></p></form></section>
 <section class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Elenco scatole</h2><small id="nitems"></small></div><div id="list" style="margin-top:12px"></div></section>
 <section class="card"><h2 style="margin-top:0">Archivio e backup</h2><div class="actions"><button id="csvBtn" class="secondary">↓ Esporta CSV</button><button id="jsonBtn" class="secondary">↓ Backup JSON</button></div><label for="restore">Ripristina backup JSON</label><input type="file" id="restore" accept=".json,application/json"><p class="foot muted">I dati rimangono su questo dispositivo/browser. Esporta periodicamente un backup: la cancellazione dei dati del browser può eliminare lo storico. Non vengono inviati a server.</p></section>
@@ -59,55 +59,40 @@ function parseCodeStrict(t){let v=String(t).toUpperCase().replace(/\s+/g,'').rep
 function parseNameStrict(t){let lines=String(t).split(/\n/).map(x=>x.trim().replace(/[^A-Za-zÀ-ÿ. ]/g,'').replace(/\s+/g,' ').trim().toUpperCase());return lines.find(x=>/^[A-ZÀ-Ÿ][A-ZÀ-Ÿ. ]{2,29}$/.test(x)&&!/(LOTTO|BANCALE|SCATOLA)/.test(x))||''}
 async function runOCR(useCrop){
  if(!photoFile)return;
- const status=$('ocrStatus');let worker;
+ const status=$('ocrStatus');
+ const key=localStorage.getItem('lavoro_ocrspace_key')||'';
+ if(!key){status.textContent='Inserisci prima la chiave gratuita OCR.space e salva.';return}
  $('readCrop').disabled=true;
  try{
-  status.textContent='Analisi delle scritte sulla fotografia…';
-  await loadOCR();
-  const canvas=useCrop?await getCropCanvas():await fullCanvas();
-  worker=await Tesseract.createWorker('eng');
-  const results=[];let code=null,name='';
-  const detected=detectLabel(canvas);
-  const regions=useCrop?
-   [{kind:'both',canvas,psm:'11'}]:
-   [
-    {kind:'both',canvas,psm:'11'},
-    {kind:'nome',canvas:regionCanvas(canvas,0,0,1,.46),psm:'11'},
-    {kind:'codice',canvas:regionCanvas(canvas,0,.48,1,.52),psm:'11'},
-    {kind:'nome',canvas:labelBand(canvas,detected,0,.48),psm:'7'},
-    {kind:'codice',canvas:labelBand(canvas,detected,.55,1),psm:'7'}
-   ];
-  for(const region of regions){
-   if(code&&name)break;
-   status.textContent='Ricerca '+(!name?'nome ':'')+(!code?'codice':'')+'…';
-   await worker.setParameters({tessedit_pageseg_mode:region.psm,tessedit_char_whitelist:'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/.- '});
-   const res=await worker.recognize(region.canvas);
-   const t=(res.data.text||'').trim();
-   results.push(region.kind+': '+t);
-   if(!code){const p=parseCodeStrict(t);if(p)code=p}
-   if(!name){
-    const lines=t.split(/\n/).map(x=>x.trim());
-    const candidates=lines.filter(x=>/^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ. ]{2,30}$/.test(x)&&!/(LOTTO|BANCALE|SCATOLA)/i.test(x));
-    const known=candidates.find(x=>Object.keys(studi).includes(x.toUpperCase()));
-    if(known)name=known.toUpperCase();
-    else if(region.kind==='nome'&&candidates.length)name=candidates[0].toUpperCase();
-   }
-  }
-  showForm(false);
-  $('ocrReview').classList.remove('hidden');
-  $('ocrRaw').textContent=results.join('\n---\n');
-  $('lot').value=code?.lot||'';
-  $('pallet').value=code?.pallet||'';
-  $('boxno').value=code?.box||'';
-  $('studio').value=name;
-  updateNotaries();
-  $('message').textContent=code?'Controlla i campi prima di iniziare.':'Codice non individuato: verifica la foto o inseriscilo manualmente.';
-  status.textContent='Lettura terminata.';
-  $('entryForm').scrollIntoView({behavior:'smooth',block:'start'});
+  status.textContent='Invio fotografia al nuovo lettore OCR…';
+  const source=useCrop?await getCropCanvas():await fullCanvas();
+  const resized=document.createElement('canvas');
+  const scale=Math.min(1,1600/Math.max(source.width,source.height));
+  resized.width=Math.round(source.width*scale);resized.height=Math.round(source.height*scale);
+  resized.getContext('2d').drawImage(source,0,0,resized.width,resized.height);
+  const blob=await new Promise(ok=>resized.toBlob(ok,'image/jpeg',.78));
+  const form=new FormData();form.append('file',blob,'etichetta.jpg');form.append('language','eng');form.append('OCREngine','2');form.append('scale','true');form.append('isTable','false');
+  const response=await fetch('https://api.ocr.space/parse/image',{method:'POST',headers:{apikey:key},body:form});
+  if(!response.ok)throw Error('Servizio OCR non raggiungibile ('+response.status+')');
+  const json=await response.json();
+  if(json.IsErroredOnProcessing)throw Error((json.ErrorMessage||json.ErrorDetails||'Errore OCR').toString());
+  const raw=(json.ParsedResults||[]).map(x=>x.ParsedText||'').join('\n');
+  const code=parseCodeStrict(raw);
+  const lines=raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  const codeIndex=lines.findIndex(x=>/L\s*\d+\s*[/\\-]\s*B\s*\d+\s*[/\\-]\s*S\s*\d+/i.test(x));
+  const nameCandidates=lines.filter(x=>/^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ. ]{2,35}$/.test(x)&&!/(LOTTO|BANCALE|SCATOLA)/i.test(x));
+  const known=nameCandidates.find(x=>Object.keys(studi).includes(x.toUpperCase()));
+  const name=(known||nameCandidates.find(x=>lines.indexOf(x)<codeIndex||codeIndex<0)||'').toUpperCase();
+  showForm(false);$('ocrReview').classList.remove('hidden');$('ocrRaw').textContent=raw||'(nessun testo riconosciuto)';
+  $('lot').value=code?.lot||'';$('pallet').value=code?.pallet||'';$('boxno').value=code?.box||'';$('studio').value=name;
+  updateNotaries();$('message').textContent=code?'Controlla i dati prima di iniziare.':'Codice non riconosciuto: completa i campi manualmente.';
+  status.textContent='Lettura terminata.';$('entryForm').scrollIntoView({behavior:'smooth',block:'start'});
  }catch(e){status.textContent='Errore lettura: '+e.message;showForm(false)}
- finally{if(worker)await worker.terminate().catch(()=>{});$('readCrop').disabled=false}
+ finally{$('readCrop').disabled=false}
 }
 $('readCrop').onclick=()=>runOCR(true);
 
+$('ocrApiKey').value=localStorage.getItem('lavoro_ocrspace_key')||'';
+$('saveOcrKey').onclick=()=>{const k=$('ocrApiKey').value.trim();if(!k){$('ocrKeyStatus').textContent='Inserisci la chiave.';return}localStorage.setItem('lavoro_ocrspace_key',k);$('ocrKeyStatus').textContent='Chiave salvata su questo telefono.'};
 render();
 </script></body></html>
